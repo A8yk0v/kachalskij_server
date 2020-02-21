@@ -10,7 +10,9 @@ plugins {
 
 group = 'ru.nstu'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+// For heroku
+//sourceCompatibility = '11'
+sourceCompatibility = '8'
 
 repositories {
     mavenCentral()
