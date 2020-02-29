@@ -1,29 +1,42 @@
 package ru.nstu;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+import ru.nstu.clientServices.ClientService;
 import ru.nstu.exceptions.FilesUploadException;
 
 import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @Component
 public class FileStorage {
     private File algorithm;
-    private File Data;
-    private File DataManipulationAlgorithm;
+    private File data;
+    private File dataManipulationAlgorithm;
+
+    @Autowired
+    private ClientService clientService;
 
     public void addFiles(MultipartFile alg, MultipartFile data, MultipartFile dataAlg) throws FilesUploadException {
         try {
-            algorithm = new File(alg.getOriginalFilename());
-            Data = new File(data.getOriginalFilename());
-            DataManipulationAlgorithm = new File(dataAlg.getOriginalFilename());
+            algorithm = new File("algorithm");
+            this.data = new File("data");
+            dataManipulationAlgorithm = new File("dataManipulationAlgorithm");
 
-            Files.copy(alg.getInputStream(), Paths.get(algorithm.getPath()) );
-            Files.copy(data.getInputStream(), Paths.get(Data.getPath()) );
-            Files.copy(dataAlg.getInputStream(), Paths.get(DataManipulationAlgorithm.getPath()) );
-        } catch (Exception e) {
+            Files.deleteIfExists(algorithm.toPath());
+            Files.deleteIfExists(this.data.toPath());
+            Files.deleteIfExists(dataManipulationAlgorithm.toPath());
+
+            Files.copy(alg.getInputStream(), algorithm.toPath() );
+            Files.copy(data.getInputStream(), this.data.toPath() );
+            Files.copy(dataAlg.getInputStream(), dataManipulationAlgorithm.toPath() );
+
+        } catch (FileAlreadyExistsException e) {
+            System.out.println(e.toString());
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -33,10 +46,10 @@ public class FileStorage {
     }
 
     public final File getData() {
-        return Data;
+        return data;
     }
 
     public final File getDataManipulationAlgorithm() {
-        return DataManipulationAlgorithm;
+        return dataManipulationAlgorithm;
     }
 }

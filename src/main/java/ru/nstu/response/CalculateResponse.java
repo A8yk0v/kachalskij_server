@@ -1,9 +1,9 @@
-package ru.nstu;
+package ru.nstu.response;
 
-public class Result {
+public class CalculateResponse {
     private String status;
 
-    public Result(String status) {
+    public CalculateResponse(String status) {
         this.status = status;
     }
 

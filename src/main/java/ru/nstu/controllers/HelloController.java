@@ -1,7 +1,6 @@
 package ru.nstu.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +11,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        System.out.println("index");
+        System.out.println("index.html");
         return "index.html";
     }
 

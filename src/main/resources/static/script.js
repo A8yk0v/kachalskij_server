@@ -22,3 +22,33 @@ formFileSend.onsubmit = async (event) => {
 
     alert(result.status);
 };
+
+refreshClientsListButton.onclick = async (event) => {
+    // ЗАПРОС СПИСКА КЛИЕНТОВ
+    let response = await fetch('/api/refreshClientsList', {
+        method: 'POST'
+    });
+    let result = await response.json();
+
+    // ОББРАБОТКА ОТВЕТА
+    let list = document.getElementById("listClients");
+    // Очистим список
+    while(list.lastChild) {
+        list.lastChild.remove();
+    }
+    // Вставим новые значения в список
+    for (i in result.clients) {
+        let newLi = document.createElement('li');
+        newLi.innerHTML = result.clients[i];
+        list.appendChild(newLi);
+    }
+};
+
+calculateButton.onclick = async (event) => {
+    // ЗАПРОС на вычисление
+    let response = await fetch('/api/calculate', {
+        method: 'POST'
+    });
+    let result = await response.json();
+    alert(result.status);
+};

@@ -1,17 +1,22 @@
+body {
+    display: inline;
+}
+
 div  {
+    /*display: inline-block;*/
     margin-top: 15px;
-    background: cornflowerblue;
-    float: right;
-    width: 49%;
+    /*width: 47%;*/
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 form {
+    /*display: inline-block;*/
     margin-top: 15px;
     background: moccasin;
-    width: 49%;
-    float: left;
+    /*width: 30%;*/
+    /*float: left;*/
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 10px;
 }
 
 .page-header {
@@ -32,4 +37,28 @@ form {
 
 .iconOk {
     visibility: hidden;
+}
+
+.clientsDiv {
+    /*display: inline-block;*/
+    padding: 10px;
+    /*width: 47%;*/
+    /*float: right;*/
+    background: cornflowerblue;
+}
+
+.refreshClientsListButton {
+     /*float: right;*/
+     /*margin: 10px;*/
+ }
+
+.calculateButton {
+    /*margin: 10px;*/
+}
+
+.calculateDiv {
+    /*float: left;*/
+    /*margin: 10px;*/
+    padding: 10px;
+    background: greenyellow;
 }

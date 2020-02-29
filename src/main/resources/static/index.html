@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
     <title>kachalskij</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -27,13 +27,16 @@
 
         <p></p> <input type="submit" content="Send to server"/>
     </form>
-    <div>
-        <p>Clients:</p>
-        <ul>
-            <li><p>client_1</p></li>
-            <li><p>client_2</p></li>
-            <li><p>:)</p></li>
+    <div id="clientsDiv" class="clientsDiv">
+        <p class="clientsForm">Clients:</p>
+        <button id="refreshClientsListButton" class="refreshClientsListButton">Refresh</button>
+        <ul id="listClients">
         </ul>
+    </div>
+
+    <div id="calculateDiv" class="calculateDiv">
+        <button id="calculateButton" class="calculateButton">Calculate</button>
+        <p>calculateForm</p>
     </div>
 
 <!--    <footer class="page-footer">-->
