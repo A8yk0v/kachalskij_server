@@ -2,7 +2,7 @@ package ru.nstu.matrix;
 
 public class Matrix {
     private int n, m;
-    int[][] M;
+    private int[][] M;
 
     public Matrix(int n, int m) {
         this.n = n;

@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import ru.nstu.FileStorage;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 @Component
@@ -16,9 +19,13 @@ public class MatrixServices {
     @Autowired
     FileStorage fileStorage;
 
+    public int getCount() {
+        return matrixA.getN();
+    }
+
     // Вычисление задачи и подготовка отчета
     public long calculate() {
-        readData(fileStorage.getData());
+        //readData();
 
         long m = System.currentTimeMillis();
         matrixC = matrixCalculate.calculate(0, matrixA.getN(), matrixA, matrixB);
@@ -27,29 +34,35 @@ public class MatrixServices {
     }
 
 
-    void readData(File data) {
+    public void readData() {
         try {
-            Scanner in = new Scanner(data.toPath(), "UTF-8");
-            // FOR matrixA
-            int n = in.nextInt();
-            int m = in.nextInt();
-            matrixA = new Matrix(n, m);
-            for (int i = 0; i < matrixA.getN(); i++) {
-                for (int j = 0; j < matrixA.getM(); j++) {
-                    matrixA.set(i, j, in.nextInt());
-                }
-            }
-            // FOR matrixB
-            n = in.nextInt();
-            m = in.nextInt();
-            matrixB = new Matrix(n, m);
-            for (int i = 0; i < matrixB.getN(); i++) {
-                for (int j = 0; j < matrixB.getM(); j++) {
-                    matrixB.set(i, j, in.nextInt());
-                }
-            }
+            File data = fileStorage.getData();
+            //InputStream fileIn = new FileInputStream(fileStorage.getData());
 
-            in.close();
+            //try (InputStreamReader in = new InputStreamReader(fileIn, "UTF-8") ) {
+                Scanner in = new Scanner(data.toPath(), "UTF-8");
+                // FOR matrixA
+                int n = in.nextInt();
+                int m = in.nextInt();
+                matrixA = new Matrix(n, m);
+                for (int i = 0; i < matrixA.getN(); i++) {
+                    for (int j = 0; j < matrixA.getM(); j++) {
+                        matrixA.set(i, j, in.nextInt());
+                    }
+                }
+                // FOR matrixB
+                n = in.nextInt();
+                m = in.nextInt();
+                matrixB = new Matrix(n, m);
+                for (int i = 0; i < matrixB.getN(); i++) {
+                    for (int j = 0; j < matrixB.getM(); j++) {
+                        matrixB.set(i, j, in.nextInt());
+                    }
+                }
+
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
         catch (Exception e) {
             e.printStackTrace();

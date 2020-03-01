@@ -24,27 +24,19 @@ public class RestFulController {
 
 
     @PostMapping("/api/file")
-    public Response uploadFiles(@RequestParam("file1") MultipartFile file1,
-                                @RequestParam("file2") MultipartFile file2,
-                                @RequestParam("file3") MultipartFile file3) {
+    public Response uploadFiles(@RequestParam("data") MultipartFile data) {
 
         try {
-            if (file1 != null && file1.getOriginalFilename().equals("") ||
-                    file2 != null && file2.getOriginalFilename().equals("") ||
-                    file3 != null && file3.getOriginalFilename().equals(""))
+            if (data != null && data.getOriginalFilename().equals(""))
                 return new Response("bad");
 
-            fileStorage.addFiles(file1, file2, file3);
-        }
-        catch (FilesUploadException e) {
-            return new Response(e.toString());
-        }
-        catch (Exception e) {
+            fileStorage.addFile(data);
+        } catch (Exception e) {
             e.printStackTrace();
             return new Response("bad");
         }
 
-        System.out.println("Files uploaded");
+        System.out.println("File uploaded");
         return new Response("ok");
     }
 
@@ -70,17 +62,24 @@ public class RestFulController {
      */
     @PostMapping("/api/calculate")
     public CalculateResponse calculate() {
+        // Объект отчета
+        CalculateResponse response = new CalculateResponse("Ok");
+
         // Отправляем данные клиентам
         clientService.sendFileDataOnClients();
-        // TODO В это время вычисляем сами
+        // Инициализируем матрицы
+        matrixServices.readData();
+        // Что вычислять клиентам
+        clientService.sendClientsMatrixCalculateParam(matrixServices.getCount());
+        // В это время вычисляем сами
         long time = matrixServices.calculate();
-        System.out.println("Время вычисления на сервере: " + time);
+        System.out.println("Время вычисления на сервере: " + time/1000.0);
+        response.addStrLIne("Время вычисления на сервере: " + time/1000.0);
+        // Ожидаем ответы от клиентов
+        String str = clientService.clientsResponse();
+        response.addStrLIne(str);
+        response.addStrLIne("-----------------------------------------------");
 
-        return new CalculateResponse("{\"status\":[\"Ok\"]}");
-
-
-        // TODO Ожидаем ответы от клиентов
-
-        // TODO Формируем отчет
+        return response;
     }
 }

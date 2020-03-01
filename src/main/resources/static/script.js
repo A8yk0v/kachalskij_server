@@ -1,8 +1,6 @@
 console.log("Hello! :)");
 
 formFileSend.onsubmit = async (event) => {
-    console.log("SendFilesToServer()");
-
     event.preventDefault();
     let response = await fetch('/api/file', {
         method: 'POST',
@@ -15,12 +13,9 @@ formFileSend.onsubmit = async (event) => {
 
     if (result.status === "ok")
     {
-        document.getElementById('iconOk1').style.visibility = 'visible';
-        document.getElementById('iconOk2').style.visibility = 'visible';
-        document.getElementById('iconOk3').style.visibility = 'visible';
+        document.getElementById('iconOk').style.visibility = 'visible';
+        alert("file send to server");
     }
-
-    alert(result.status);
 };
 
 refreshClientsListButton.onclick = async (event) => {
@@ -42,6 +37,7 @@ refreshClientsListButton.onclick = async (event) => {
         newLi.innerHTML = result.clients[i];
         list.appendChild(newLi);
     }
+    alert("refresh: ok");
 };
 
 calculateButton.onclick = async (event) => {
@@ -50,5 +46,9 @@ calculateButton.onclick = async (event) => {
         method: 'POST'
     });
     let result = await response.json();
-    alert(result.status);
+    // Выводим отчет по вычислениям
+    let text = document.getElementById("calculateReport");
+    text.innerHTML = result.content;
+
+    alert("calculate: done");
 };

@@ -16,14 +16,8 @@
         </a>
     </header>
     <form id="formFileSend" method="post" enctype="multipart/form-data">
-        <p>Add algorithm:</p> <input type="file" name="file1"/>
-        <img id="iconOk1" class="iconOk" src="iconOk.png" width="20" height="20" alt="Ok">
-
-        <p>Add data:</p> <input type="file" name="file2"/>
-        <img id="iconOk2" class="iconOk" src="iconOk.png" width="20" height="20" alt="Ok">
-
-        <p>Add data manipulation algorithm:</p> <input type="file" name="file3"/>
-        <img id="iconOk3" class="iconOk" src="iconOk.png" width="20" height="20" alt="Ok">
+        <p>Add data:</p> <input type="file" name="data"/>
+        <img id="iconOk" class="iconOk" src="iconOk.png" width="20" height="20" alt="Ok">
 
         <p></p> <input type="submit" content="Send to server"/>
     </form>
@@ -36,7 +30,7 @@
 
     <div id="calculateDiv" class="calculateDiv">
         <button id="calculateButton" class="calculateButton">Calculate</button>
-        <p>calculateForm</p>
+        <pre id="calculateReport">...</pre>
     </div>
 
 <!--    <footer class="page-footer">-->

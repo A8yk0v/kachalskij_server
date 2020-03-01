@@ -2,13 +2,10 @@ package ru.nstu.matrix;
 
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.util.Scanner;
-
 @Component
 public class MatrixCalculate {
 
-    public Matrix calculate(int i, int j, Matrix A, Matrix B) {
+    public synchronized Matrix calculate(int i, int j, Matrix A, Matrix B) {
         Matrix C = new Matrix(A.getN(), B.getM());
         // Код
         for (int k = i; k < j; k++) {
@@ -19,6 +16,7 @@ public class MatrixCalculate {
                 }
                 C.set(k, l, sum);
             }
+            //System.out.println("k:" + k);
         }
         return C;
     }

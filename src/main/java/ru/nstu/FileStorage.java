@@ -19,6 +19,19 @@ public class FileStorage {
     @Autowired
     private ClientService clientService;
 
+    public void addFile(MultipartFile data) {
+        try {
+            this.data = new File("data");
+            Files.deleteIfExists(this.data.toPath());
+            Files.copy(data.getInputStream(), this.data.toPath() );
+        } catch (FileAlreadyExistsException e) {
+            System.out.println(e.toString());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addFiles(MultipartFile alg, MultipartFile data, MultipartFile dataAlg) throws FilesUploadException {
         try {
             algorithm = new File("algorithm");
